@@ -35,9 +35,9 @@
 
             <div class="form-group">
                 <select name="category_id" class="form-control" required>
-                    <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>请选择分类</option>
+                    <option value="" hidden disabled {{ !! $topic ? '' : 'selected' }}>请选择分类</option>
                     @foreach ($categories as $value)
-                        <option value="{{ $value->id }}" {{ old('category_id') == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
+                        <option value="{{ $value->id }}" {{ !! $topic && $topic->category_id === $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
                     @endforeach
                 </select>
             </div>
