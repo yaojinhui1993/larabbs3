@@ -47,4 +47,9 @@ class Topic extends Model
     {
         return route('topics.show', array_merge(['topic' => $this->id, 'slug' => $this->slug], $params));
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }
