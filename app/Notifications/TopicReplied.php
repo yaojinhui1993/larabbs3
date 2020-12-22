@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TopicReplied extends Notification implements Queueable
+class TopicReplied extends Notification
 {
     use Queueable;
 
