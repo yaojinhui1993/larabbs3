@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -82,5 +83,22 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        if (strlen($value) !== 60) {
+            $value = bcrypt($value);
+        }
+        return $this->attributes['password']  = $value;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        if (! Str::startsWith($path, 'http')) {
+            $path = config('app.url') . "/uploads/images/avatars/{$path}";
+        }
+
+        $this->attributes['avatar'] = $path;
     }
 }
