@@ -51,8 +51,10 @@ trait ActiveUserHelper
         $activeUsers = collect();
 
         foreach ($users as $userId => $user) {
-            if ($user) {
-                $activeUsers->push($user);
+            $userModel = $this->find($userId);
+
+            if ($userModel) {
+                $activeUsers->push($userModel);
             }
         }
 

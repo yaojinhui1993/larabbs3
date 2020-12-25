@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Topic;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -21,7 +22,10 @@ class TopicsController extends Controller
         $topics = Topic::with(['user', 'category'])
             ->withOrder($request->get('order'))
             ->paginate();
-        return view('topics.index', compact('topics'));
+
+        $activeUsers = (new User())->getActiveUsers();
+
+        return view('topics.index', compact('topics', 'activeUsers'));
     }
 
     public function show(Request $request, Topic $topic)
