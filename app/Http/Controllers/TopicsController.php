@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Link;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Category;
@@ -24,8 +25,9 @@ class TopicsController extends Controller
             ->paginate();
 
         $activeUsers = (new User())->getActiveUsers();
+        $links = (new Link())->getAllCached();
 
-        return view('topics.index', compact('topics', 'activeUsers'));
+        return view('topics.index', compact('topics', 'activeUsers', 'links'));
     }
 
     public function show(Request $request, Topic $topic)

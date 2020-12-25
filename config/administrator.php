@@ -72,6 +72,10 @@ return [
         '站点管理' => [
             'settings.site',
         ],
+        '站点管理' => [
+            'settings.site',
+            'links',
+        ],
     ],
 
     /*

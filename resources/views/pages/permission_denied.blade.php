@@ -1,4 +1,4 @@
-@extends('layotus.app')
+@extends('layouts.app')
 
 @section('title', '无权限访问')
 
