@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Overtrue\EasySms\EasySms;
 use Illuminate\Support\ServiceProvider;
 
 class EasySmsServiceProvider extends ServiceProvider
@@ -14,7 +13,7 @@ class EasySmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(EasySms::class, function ($app) {
+        $this->app->singleton(\Overtrue\EasySms\EasySms::class, function ($app) {
             return new EasySms(config('easysms'));
         });
 
@@ -29,5 +28,18 @@ class EasySmsServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    }
+}
+
+class EasySms extends \Overtrue\EasySms\EasySms
+{
+    public function __construct($config)
+    {
+        //
+    }
+
+    public function send($to, $message, array $gateways = [])
+    {
+        debugbar('messages', $message);
     }
 }
