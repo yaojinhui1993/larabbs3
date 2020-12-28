@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class EasySmsServiceProvider extends ServiceProvider
@@ -40,6 +41,6 @@ class EasySms extends \Overtrue\EasySms\EasySms
 
     public function send($to, $message, array $gateways = [])
     {
-        debugbar('messages', $message);
+        Log::info('messages', $message);
     }
 }
