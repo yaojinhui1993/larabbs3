@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Support\Str;
 use Overtrue\EasySms\EasySms;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Auth\AuthenticationException;
 use App\Http\Requests\Api\VerificationCodeRequest;
 use Overtrue\EasySms\Exceptions\NoGatewayAvailableException;
 
@@ -12,6 +13,17 @@ class VerificationCodesController extends Controller
 {
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
+        $captchaData = Cache::get($request->captcha_key);
+
+        if (! $captchaData) {
+            abort(403, '图片验证码已失效！');
+        }
+
+        if (! hash_equals($captchaData['code'], $request->captcha_code)) {
+            Cache::forget($request->captcha_key);
+            throw new AuthenticationException('验证码错误');
+        }
+
         $phone = $request->phone;
 
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
@@ -27,7 +39,7 @@ class VerificationCodesController extends Controller
             $message = $exception->getMessage();
             abort(500, $message ?: '短信发送异常');
         } catch (\Exception $e) {
-            dump($e->getMessage());
+            abort(500, $e->getMessage() ?: '短信发送异常');
         }
 
         $key = 'verificationCode_' . Str::random(15);
