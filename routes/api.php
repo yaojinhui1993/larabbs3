@@ -47,16 +47,19 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
         Route::get('users/{user}', 'UsersController@show')->name('users.show');        // 某个用户的详情
         Route::get('categories', 'CategoriesController@index')->name('categories.index'); // 分类列表
 
+        Route::resource('topics', 'TopicsController')->only(['index', 'show']); // 话题列表，详情
+
         // 登录以后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             Route::get('user', 'UsersController@me')->name('user.show');
 
             Route::post('images', 'ImagesController@store')->name('images.store');
 
-            // 编辑用户信息
-            Route::patch('user', 'UsersController@update')->name('user.update');
-            // 上传图片
-            Route::post('images', 'ImagesController@store')->name('images.store');
+
+            Route::patch('user', 'UsersController@update')->name('user.update'); // 编辑用户信息
+            Route::post('images', 'ImagesController@store')->name('images.store'); // 上传图片
+
+            Route::resource('topics', 'TopicsController')->only(['store', 'update', 'destroy']); // 发布话题
         });
     });
 });
