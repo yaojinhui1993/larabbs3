@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Queries\TopicQuery;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\TopicResource;
 use App\Http\Requests\Api\TopicRequest;
 
