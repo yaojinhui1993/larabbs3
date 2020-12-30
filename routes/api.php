@@ -70,6 +70,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
             Route::get('topics/{topic}/replies', 'RepliesController@index')->name('topics.replies.index'); // 话题回复列表
             Route::get('notifications', 'NotificationsController@index')->name('notifications.index'); // 通知列表
             Route::get('notifications/stats', 'NotificationsController@stats')->name('notifications.stats'); // 通知统计
+            Route::patch('user/read/notifications', 'NotificationsController@read')->name('user.notifications.read'); // 标记消息通知已读
         });
     });
 });
