@@ -67,6 +67,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
             Route::post('topics/{topic}/replies', 'RepliesController@store')->name('topic.replies.store'); // 发布回复
             Route::delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')->name('topic.replies.destroy'); // 删除回复
+            Route::get('topics/{topic}/replies', 'RepliesController@index')->name('topics.replies.index'); // 话题回复列表
         });
     });
 });
