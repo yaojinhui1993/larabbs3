@@ -51,6 +51,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
         Route::resource('topics', 'TopicsController')->only(['index', 'show']); // 话题列表，详情
 
+        Route::get('links', 'LinksController@index')->name('links.index'); // 资源推荐
+
 
 
         // 登录以后可以访问的接口
