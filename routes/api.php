@@ -72,9 +72,11 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')
 
 
                 Route::patch('user', 'UsersController@update')->name('user.update'); // 编辑用户信息
-            Route::post('images', 'ImagesController@store')->name('images.store'); // 上传图片
+                Route::put('user', 'UsersController@update')->name('user.update'); // 编辑用户信息
 
-            Route::resource('topics', 'TopicsController')->only(['store', 'update', 'destroy']); // 发布话题
+                Route::post('images', 'ImagesController@store')->name('images.store'); // 上传图片
+
+                Route::resource('topics', 'TopicsController')->only(['store', 'update', 'destroy']); // 发布话题
 
                 Route::post('topics/{topic}/replies', 'RepliesController@store')->name('topic.replies.store'); // 发布回复
             Route::delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')->name('topic.replies.destroy'); // 删除回复
