@@ -49,9 +49,7 @@ class TopicsController extends Controller
 
     public function userIndex(Request $request, User $user, TopicQuery $query)
     {
-        $query = $user->topics()->getQuery();
-
-        $topics = $query->paginate();
+        $topics = $query->where('user_id', $user->id)->paginate();
 
         return TopicResource::collection($topics);
     }
