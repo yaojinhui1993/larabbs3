@@ -59,4 +59,9 @@ class Topic extends Model
 
         $this->save();
     }
+
+    public function topReplies()
+    {
+        return $this->replies()->limit(5);
+    }
 }

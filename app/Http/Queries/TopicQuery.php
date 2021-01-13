@@ -12,7 +12,7 @@ class TopicQuery extends QueryBuilder
     {
         parent::__construct(Topic::query());
 
-        $this->allowedIncludes('user', 'category', 'user.roles')
+        $this->allowedIncludes('user', 'category', 'user.roles', 'topReplies', 'topReplies.user')
             ->allowedFilters([
                 'title',
                 AllowedFilter::exact('category_id'),
